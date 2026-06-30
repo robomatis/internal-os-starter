@@ -1,0 +1,25 @@
+-- crm_demo module — database migration.
+--
+-- This reference module is READ-ONLY against the Intrix API, so it has no tables
+-- of its own. That is legitimate: a pure read-through module needs no storage.
+--
+-- This file exists to show the CONVENTION you MUST follow when a module DOES
+-- need to store data:
+--
+--   1. Every table name starts with the module id as a prefix:  crm_demo_*
+--      (never a bare `contacts` — that blurs data across modules).
+--   2. RLS is enabled IN THIS SAME migration, scoped to the row's owner.
+--
+-- Example — uncomment and adapt if this module needs to persist anything:
+--
+-- create table if not exists public.crm_demo_favorites (
+--   id          uuid primary key default gen_random_uuid(),
+--   user_id     uuid not null default auth.uid() references auth.users (id) on delete cascade,
+--   contact_id  text not null,
+--   created_at  timestamptz not null default now()
+-- );
+-- alter table public.crm_demo_favorites enable row level security;
+-- create policy "crm_demo_favorites: owner all"
+--   on public.crm_demo_favorites for all
+--   using (auth.uid() = user_id)
+--   with check (auth.uid() = user_id);
