@@ -4,6 +4,14 @@ import { withSentryConfig } from "@sentry/nextjs";
 const nextConfig: NextConfig = {
   // Invoice uploads (photos / PDFs) exceed the 1 MB Server Action default body limit.
   experimental: { serverActions: { bodySizeLimit: "10mb" } },
+  // pdfkit (ponudbe PDF generation) ships its own font data files — keep it external
+  // so the bundler doesn't try to inline them.
+  serverExternalPackages: ["pdfkit"],
+  // Make sure the bundled DejaVu fonts (Slovenian glyphs for the quote PDF) ship with
+  // the serverless function on Vercel — they're read from disk at runtime.
+  outputFileTracingIncludes: {
+    "/m/[module]": ["./modules/ponudbe/assets/**"],
+  },
 };
 
 // Sentry build-time options. Source-map upload only runs when SENTRY_AUTH_TOKEN

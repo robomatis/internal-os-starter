@@ -6,6 +6,8 @@ import { AdminModule } from "@/modules/admin/pages";
 import { CrmDemoModule } from "@/modules/crm_demo/pages";
 import { AiAssistModule } from "@/modules/ai_assist/pages";
 import { InvoiceOcrModule } from "@/modules/invoice_ocr/pages";
+import { PotniNalogiModule } from "@/modules/potni_nalogi/pages";
+import { PonudbeModule } from "@/modules/ponudbe/pages";
 import {
   Card,
   CardDescription,
@@ -73,6 +75,10 @@ export default async function ModuleRouter({
       return <AiAssistModule />;
     case "invoice_ocr":
       return <InvoiceOcrModule selectedId={id} />;
+    case "potni_nalogi":
+      return <PotniNalogiModule selectedId={id} />;
+    case "ponudbe":
+      return <PonudbeModule selectedId={id} />;
     default:
       notFound();
   }

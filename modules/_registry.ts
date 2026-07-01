@@ -36,6 +36,18 @@ export const MODULES: ModuleDef[] = [
     description: "Naloži račun → AI prebere (OCR) → potrdi/zavrni → izvozi CSV.",
     icon: "🧾",
   },
+  {
+    id: "potni_nalogi",
+    name: "Potni nalogi",
+    description: "Vnesi stranko in relacijo → Google Maps izračuna km → natisni potni nalog.",
+    icon: "🚗",
+  },
+  {
+    id: "ponudbe",
+    name: "Ponudbe",
+    description: "E-pošta → klasifikacija → ZOHO katalog → ponudba (PDF + osnutek).",
+    icon: "📨",
+  },
 ];
 
 export function getModule(id: string): ModuleDef | undefined {
